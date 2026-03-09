@@ -8,161 +8,167 @@
     <style>
         :root { --verde: #26d07c; --roxo: #440099; --rosa: #d62598; --preto: #000000; --cinza: #111111; }
         
-        body { background: var(--preto); color: white; font-family: 'Montserrat', sans-serif; margin: 0; display: flex; height: 100vh; flex-direction: row; }
-
-        /* Sidebar Desktop / Topbar Mobile */
-        aside { 
-            width: 260px; background: #0a0a0a; border-right: 1px solid #222; 
-            padding: 25px; display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; 
-            z-index: 100;
+        /* Estrutura Base */
+        body { 
+            background: var(--preto); color: white; font-family: 'Montserrat', sans-serif; 
+            margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; 
         }
-        .logo-area { margin-bottom: 40px; text-align: center; }
-        .logo-area img { width: 100%; max-width: 140px; }
+
+        /* Header com Logo (Visível em todos os dispositivos) */
+        header {
+            width: 100%; background: #0a0a0a; border-bottom: 1px solid #222;
+            padding: 15px 0; text-align: center; flex-shrink: 0; z-index: 101;
+        }
+        header img { height: 35px; width: auto; }
+
+        /* Container que segura Sidebar e Main */
+        .wrapper { display: flex; flex-direction: row; flex-grow: 1; overflow: hidden; }
+
+        /* Sidebar Lateral Estilo Desktop */
+        aside { 
+            width: 240px; background: #0a0a0a; border-right: 1px solid #222; 
+            padding: 20px; display: flex; flex-direction: column; gap: 8px; 
+            flex-shrink: 0; overflow-y: auto;
+        }
 
         .nav-btn { 
-            background: var(--verde); color: black; border: none; padding: 12px 15px; 
+            background: var(--verde); color: black; border: none; padding: 14px 12px; 
             border-radius: 8px; font-weight: 900; cursor: pointer; text-align: left;
             text-transform: uppercase; font-size: 10px; transition: 0.3s;
-            white-space: nowrap;
+            white-space: normal; line-height: 1.2;
         }
         .nav-btn.active { outline: 2px solid white; box-shadow: 0 0 10px var(--verde); }
 
         /* Conteúdo Principal */
         main { flex-grow: 1; padding: 40px; overflow-y: auto; background: radial-gradient(circle at top right, #1a0033 0%, #000 80%); }
-        .aba-conteudo { display: none; max-width: 1000px; margin: 0 auto; } 
+        .aba-conteudo { display: none; max-width: 900px; margin: 0 auto; } 
         .aba-conteudo.ativa { display: block; animation: fadeIn 0.5s ease; }
 
-        h1 { font-size: 36px; font-weight: 900; margin-bottom: 20px; line-height: 1.1; }
+        h1 { font-size: 34px; font-weight: 900; margin-bottom: 15px; line-height: 1.1; color: white; }
         p { font-size: 16px; color: #ccc; line-height: 1.5; }
 
-        /* Containers Interativos */
-        .pilar-container { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+        /* Elementos Internos */
+        .pilar-container { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
         .btn-pilar { 
-            flex: 1; min-width: 120px; padding: 15px; border: 1px solid #333; background: #0a0a0a;
-            color: #888; font-weight: 900; cursor: pointer; border-radius: 12px; transition: 0.3s;
+            flex: 1; min-width: 110px; padding: 12px; border: 1px solid #333; background: #0a0a0a;
+            color: #888; font-weight: 900; cursor: pointer; border-radius: 10px; transition: 0.3s;
             text-transform: uppercase; font-size: 9px;
         }
         .btn-pilar.active-fisico { border-color: var(--verde); color: var(--verde); background: rgba(38, 208, 124, 0.1); }
-        .btn-pilar.active-mental { border-color: var(--roxo); color: #9d4edd; background: rgba(68, 0, 153, 0.1); }
-        .btn-pilar.active-nutri { border-color: var(--rosa); color: var(--rosa); background: rgba(214, 37, 152, 0.1); }
 
-        .box-detalhes { background: var(--cinza); padding: 25px; border-radius: 20px; border: 1px solid #222; min-height: 250px; }
-        .video-container { width: 100%; border-radius: 15px; overflow: hidden; border: 2px solid #222; aspect-ratio: 16/9; background: #000; margin-top: 15px; }
-
-        .sac-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .sac-card { background: #0a0a0a; border: 1px solid #333; border-radius: 15px; padding: 20px; text-align: center; }
+        .box-detalhes { background: var(--cinza); padding: 25px; border-radius: 15px; border: 1px solid #222; }
+        .video-container { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #333; aspect-ratio: 16/9; background: #000; margin-top: 15px; }
 
         /* Responsividade para Celular */
         @media (max-width: 768px) {
-            body { flex-direction: column; }
-            aside { 
-                width: 100%; border-right: none; border-bottom: 1px solid #222; 
-                padding: 15px; flex-direction: row; overflow-x: auto; 
-                gap: 8px; position: sticky; top: 0; 
+            aside { width: 100px; padding: 10px; gap: 6px; }
+            .nav-btn { 
+                font-size: 8px; padding: 10px 5px; text-align: center; 
+                display: flex; align-items: center; justify-content: center;
+                min-height: 50px;
             }
-            .logo-area { display: none; } /* Remove logo no mobile para ganhar espaço */
-            main { padding: 20px; }
-            h1 { font-size: 26px; }
-            .sac-grid { grid-template-columns: 1fr; }
-            .btn-pilar { min-width: 45%; }
-            .nav-btn { font-size: 9px; padding: 10px; }
-            .video-container { aspect-ratio: 16/9; }
+            main { padding: 20px 15px; }
+            h1 { font-size: 24px; }
+            .pilar-container { grid-template-columns: 1fr; }
+            .btn-pilar { min-width: 100%; }
+            .sac-card { margin-bottom: 10px; padding: 15px; }
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
-    <aside id="sidebar">
-        <div class="logo-area"><img src="logo.png" alt="TOTALPASS"></div>
-        <button class="nav-btn active" onclick="mudar('home', this)">Home</button>
-        <button class="nav-btn" onclick="mudar('quem', this)">Quem Somos</button>
-        <button class="nav-btn" onclick="mudar('pila', this)">Pilares</button>
-        <button class="nav-btn" onclick="mudar('acad', this)">Academias</button>
-        <button class="nav-btn" onclick="mudar('diff', this)">Diferenciais</button>
-        <button class="nav-btn" onclick="mudar('plan', this)">Planos</button>
-        <button class="nav-btn" onclick="mudar('sac', this)">SAC</button>
-        <button class="nav-btn" style="background: var(--rosa); color: white;" onclick="mudar('validacao', this)">Validação</button>
-    </aside>
 
-    <main>
-        <div id="home" class="aba-conteudo ativa">
-            <span style="color: var(--rosa); font-weight: 900; font-size: 12px;">TRADE 2026</span>
-            <h1>TREINAMENTO <span style="color: var(--verde);">TOTALPASS</span></h1>
-            <div class="video-container">
-                <iframe src="https://drive.google.com/file/d/1onONCtye0LpTh47WGMsTif3_6hiHp8LO/preview" width="100%" height="100%" allowfullscreen style="border:none;"></iframe>
-            </div>
-        </div>
+    <header>
+        <img src="logo.png" alt="TOTALPASS">
+    </header>
 
-        <div id="quem" class="aba-conteudo">
-            <h1>QUEM <span style="color: var(--rosa);">SOMOS</span></h1>
-            <p style="color: var(--verde); font-weight: 900; font-size: 14px;">NOSSO PROPÓSITO: A HUMANIDADE VIVENDO MAIS E MELHOR</p>
-            <p>Benefício corporativo do grupo Smart Fit / Bio Ritmo.</p>
-        </div>
+    <div class="wrapper">
+        <aside id="sidebar">
+            <button class="nav-btn active" onclick="mudar('home', this)">Home</button>
+            <button class="nav-btn" onclick="mudar('quem', this)">Quem Somos</button>
+            <button class="nav-btn" onclick="mudar('pila', this)">Pilares</button>
+            <button class="nav-btn" onclick="mudar('acad', this)">Academias</button>
+            <button class="nav-btn" onclick="mudar('diff', this)">Diferenciais</button>
+            <button class="nav-btn" onclick="mudar('plan', this)">Planos</button>
+            <button class="nav-btn" onclick="mudar('sac', this)">SAC</button>
+            <button class="nav-btn" style="background: var(--rosa); color: white;" onclick="mudar('validacao', this)">Validação</button>
+        </aside>
 
-        <div id="pila" class="aba-conteudo">
-            <h1>NOSSOS <span style="color: var(--rosa);">PILARES</span></h1>
-            <div class="pilar-container">
-                <button class="btn-pilar" onclick="mudarPilar('fisico', this)">TOTAL FIT</button>
-                <button class="btn-pilar" onclick="mudarPilar('mental', this)">TOTAL MIND</button>
-                <button class="btn-pilar" onclick="mudarPilar('nutri', this)">TOTAL NUTRI</button>
-            </div>
-            <div id="pilar-descricao-interna" class="box-detalhes">
-                <p style="text-align: center; color: #555; padding-top: 40px;">Selecione um pilar acima.</p>
-            </div>
-        </div>
-
-        <div id="acad" class="aba-conteudo">
-            <h1>NOSSA <span style="color: var(--rosa);">REDE</span></h1>
-            <div class="pilar-container">
-                <button class="btn-pilar" onclick="mudarRede('logos', this)">Rede</button>
-                <button class="btn-pilar" onclick="mudarRede('modalidades', this)">Modalidades</button>
-            </div>
-            <div id="rede-descricao-interna" class="box-detalhes">
-                <p style="text-align: center; color: #555; padding-top: 40px;">Selecione uma opção.</p>
-            </div>
-        </div>
-
-        <div id="diff" class="aba-conteudo">
-            <h1>+ <span style="color: var(--rosa);">DIFERENCIAIS</span></h1>
-            <div class="pilar-container">
-                <button class="btn-pilar" onclick="mudarDiff('dependente', this)">Dependente</button>
-                <button class="btn-pilar" onclick="mudarDiff('vinculo', this)">Vínculo</button>
-                <button class="btn-pilar" onclick="mudarDiff('chk', this)">Check-in</button>
-            </div>
-            <div id="diff-descricao-interna" class="box-detalhes">
-                <p style="text-align: center; color: #555; padding-top: 40px;">Selecione uma opção.</p>
-            </div>
-        </div>
-
-        <div id="plan" class="aba-conteudo">
-            <h1>PLANOS E <span style="color: var(--rosa);">PAGAMENTO</span></h1>
-            <div class="video-container">
-                <iframe src="https://drive.google.com/file/d/1jhnZ_2zSwokAV6jp0pVDWWmhWIwe2QaN/preview" width="100%" height="100%" allowfullscreen style="border:none;"></iframe>
-            </div>
-        </div>
-
-        <div id="sac" class="aba-conteudo">
-            <h1>SUPORTE <span style="color: var(--rosa);">TÉCNICO</span></h1>
-            <div class="sac-grid">
-                <div class="sac-card" style="border-bottom: 4px solid var(--verde);">
-                    <p style="font-size: 12px;">E-mail SAC:</p>
-                    <span style="font-size: 14px; color: var(--verde); font-weight: 900;">sac@totalpass.com.br</span>
-                </div>
-                <div class="sac-card" style="border-bottom: 4px solid var(--rosa);">
-                    <p style="font-size: 12px;">Instagram:</p>
-                    <span style="font-size: 14px; color: var(--rosa); font-weight: 900;">@TOTALPASS</span>
+        <main>
+            <div id="home" class="aba-conteudo ativa">
+                <span style="color: var(--rosa); font-weight: 900; font-size: 11px;">TRADE 2026</span>
+                <h1>TREINAMENTO <span style="color: var(--verde);">TOTALPASS</span></h1>
+                <div class="video-container">
+                    <iframe src="https://drive.google.com/file/d/1onONCtye0LpTh47WGMsTif3_6hiHp8LO/preview" width="100%" height="100%" allowfullscreen style="border:none;"></iframe>
                 </div>
             </div>
-        </div>
 
-        <div id="validacao" class="aba-conteudo">
-            <h1>VALIDAÇÃO FINAL</h1>
-            <div style="width: 100%; height: 600px; background: white; border-radius: 15px; overflow: hidden;">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd9LBrv2KtqfIbv5Xi9nwYLh2MHBBbKzvk8He1fGMe3KORErw/viewform?embedded=true" width="100%" height="100%" frameborder="0">Carregando…</iframe>
+            <div id="quem" class="aba-conteudo">
+                <h1>QUEM <span style="color: var(--rosa);">SOMOS</span></h1>
+                <p style="color: var(--verde); font-weight: 900; font-size: 13px;">NOSSO PROPÓSITO: A HUMANIDADE VIVENDO MAIS E MELHOR</p>
+                <p>Benefício corporativo focado em saúde integrada.</p>
             </div>
-        </div>
-    </main>
+
+            <div id="pila" class="aba-conteudo">
+                <h1>NOSSOS <span style="color: var(--rosa);">PILARES</span></h1>
+                <div class="pilar-container">
+                    <button class="btn-pilar" onclick="mudarPilar('fisico', this)">TOTAL FIT</button>
+                    <button class="btn-pilar" onclick="mudarPilar('mental', this)">TOTAL MIND</button>
+                    <button class="btn-pilar" onclick="mudarPilar('nutri', this)">TOTAL NUTRI</button>
+                </div>
+                <div id="pilar-descricao-interna" class="box-detalhes">
+                    <p style="text-align: center; color: #555; padding-top: 20px;">Selecione um pilar.</p>
+                </div>
+            </div>
+
+            <div id="acad" class="aba-conteudo">
+                <h1>NOSSA <span style="color: var(--rosa);">REDE</span></h1>
+                <div class="pilar-container">
+                    <button class="btn-pilar" onclick="mudarRede('logos', this)">Rede</button>
+                    <button class="btn-pilar" onclick="mudarRede('modalidades', this)">Modalidades</button>
+                </div>
+                <div id="rede-descricao-interna" class="box-detalhes">
+                    <p style="text-align: center; color: #555; padding-top: 20px;">Selecione uma opção.</p>
+                </div>
+            </div>
+
+            <div id="diff" class="aba-conteudo">
+                <h1>+ <span style="color: var(--rosa);">DIFERENCIAIS</span></h1>
+                <div class="pilar-container">
+                    <button class="btn-pilar" onclick="mudarDiff('dep', this)">Dependente</button>
+                    <button class="btn-pilar" onclick="mudarDiff('vin', this)">Vínculo</button>
+                </div>
+                <div id="diff-descricao-interna" class="box-detalhes">
+                    <p style="text-align: center; color: #555; padding-top: 20px;">Selecione uma opção.</p>
+                </div>
+            </div>
+
+            <div id="plan" class="aba-conteudo">
+                <h1>PLANOS E <span style="color: var(--rosa);">PAGAMENTO</span></h1>
+                <div class="video-container">
+                    <iframe src="https://drive.google.com/file/d/1jhnZ_2zSwokAV6jp0pVDWWmhWIwe2QaN/preview" width="100%" height="100%" allowfullscreen style="border:none;"></iframe>
+                </div>
+            </div>
+
+            <div id="sac" class="aba-conteudo">
+                <h1>SUPORTE <span style="color: var(--rosa);">TÉCNICO</span></h1>
+                <div class="box-detalhes">
+                    <p style="font-size: 14px; margin-bottom: 5px; color: var(--verde); font-weight: 900;">E-MAIL SAC:</p>
+                    <p style="font-size: 14px; margin-bottom: 20px;">sac@totalpass.com.br</p>
+                    <p style="font-size: 14px; margin-bottom: 5px; color: var(--rosa); font-weight: 900;">INSTAGRAM:</p>
+                    <p style="font-size: 14px;">@TOTALPASS</p>
+                </div>
+            </div>
+
+            <div id="validacao" class="aba-conteudo">
+                <h1>VALIDAÇÃO</h1>
+                <div style="width: 100%; height: 500px; background: white; border-radius: 12px; overflow: hidden;">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd9LBrv2KtqfIbv5Xi9nwYLh2MHBBbKzvk8He1fGMe3KORErw/viewform?embedded=true" width="100%" height="100%" frameborder="0">Carregando…</iframe>
+                </div>
+            </div>
+        </main>
+    </div>
 
     <script>
         function mudar(idDestino, btn) {
@@ -170,44 +176,33 @@
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(idDestino).classList.add('ativa');
             btn.classList.add('active');
-            
-            // Scroll automático para o topo no mobile
-            window.scrollTo(0,0);
+            document.querySelector('main').scrollTo(0,0);
         }
 
         function mudarPilar(tipo, btn) {
             var display = document.getElementById('pilar-descricao-interna');
-            document.querySelectorAll('#pila .btn-pilar').forEach(b => b.classList.remove('active-fisico','active-mental','active-nutri'));
-            
-            if(tipo === 'fisico') {
-                display.innerHTML = `<h3>TOTAL FIT</h3><p>+33 mil academias e +250 modalidades.</p>`;
-                btn.classList.add('active-fisico');
-            } else if(tipo === 'mental') {
-                display.innerHTML = `<h3>TOTAL MIND</h3><p>Psicólogos e meditação (Zen, Positiv, Starbem).</p>`;
-                btn.classList.add('active-mental');
-            } else {
-                display.innerHTML = `<h3>TOTAL NUTRI</h3><p>Planos alimentares e receitas.</p>`;
-                btn.classList.add('active-nutri');
-            }
+            document.querySelectorAll('#pila .btn-pilar').forEach(b => b.classList.remove('active-fisico'));
+            btn.classList.add('active-fisico');
+            if(tipo === 'fisico') display.innerHTML = `<h3>TOTAL FIT</h3><p>+33 mil academias.</p>`;
+            else if(tipo === 'mental') display.innerHTML = `<h3>TOTAL MIND</h3><p>Psicologia e meditação.</p>`;
+            else display.innerHTML = `<h3>TOTAL NUTRI</h3><p>Guias alimentares.</p>`;
         }
 
         function mudarRede(tipo, btn) {
             var display = document.getElementById('rede-descricao-interna');
             document.querySelectorAll('#acad .btn-pilar').forEach(b => b.classList.remove('active-fisico'));
             btn.classList.add('active-fisico');
-            if(tipo === 'logos') display.innerHTML = `<div class="logo-grid"><div class="logo-box">Smart Fit</div><div class="logo-box">Bio Ritmo</div></div>`;
-            else display.innerHTML = `<h3>MODALIDADES</h3><p>Musculação, Natação, Yoga, Lutas.</p>`;
+            if(tipo === 'logos') display.innerHTML = `<h3>REDE</h3><p>Smart Fit, Bio Ritmo e mais.</p>`;
+            else display.innerHTML = `<h3>MODALIDADES</h3><p>Musculação, Yoga, Crossfit.</p>`;
         }
 
         function mudarDiff(tipo, btn) {
             var display = document.getElementById('diff-descricao-interna');
             document.querySelectorAll('#diff .btn-pilar').forEach(b => b.classList.remove('active-fisico'));
             btn.classList.add('active-fisico');
-            const aviso = `<p style="color:var(--rosa); font-size:12px; margin-top:15px; border:1px dashed var(--rosa); padding:10px;">⚠️ IMPORTANTE: Cancelar o plano antigo antes de vincular.</p>`;
-            
-            if(tipo === 'dependente') display.innerHTML = `<h3>DEPENDENTE</h3><p>Perfil > Dependentes no App.</p>${aviso}`;
-            else if(tipo === 'vinculo') display.innerHTML = `<h3>VÍNCULO</h3><p>Tela Inicial > "Necessário vincular conta".</p>${aviso}`;
-            else display.innerHTML = `<h3>CHECK-IN</h3><p>Consulte no menu inferior do App.</p>`;
+            const aviso = `<p style="color:var(--rosa); font-size:11px; margin-top:10px; border:1px dashed var(--rosa); padding:8px;">⚠️ Cancelar o plano antigo antes.</p>`;
+            if(tipo === 'dep') display.innerHTML = `<h3>DEPENDENTE</h3><p>No Perfil do App.</p>${aviso}`;
+            else display.innerHTML = `<h3>VÍNCULO</h3><p>Tela Inicial > Vincular Conta.</p>${aviso}`;
         }
     </script>
 </body>
