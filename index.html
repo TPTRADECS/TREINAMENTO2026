@@ -8,70 +8,67 @@
     <style>
         :root { --verde: #26d07c; --roxo: #440099; --rosa: #d62598; --preto: #000000; --cinza: #111111; }
         
-        /* Estrutura Base */
         body { 
             background: var(--preto); color: white; font-family: 'Montserrat', sans-serif; 
             margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; 
         }
 
-        /* Header com Logo (Visível em todos os dispositivos) */
+        /* Header Fixo */
         header {
             width: 100%; background: #0a0a0a; border-bottom: 1px solid #222;
             padding: 15px 0; text-align: center; flex-shrink: 0; z-index: 101;
         }
-        header img { height: 35px; width: auto; }
+        header img { height: 30px; width: auto; }
 
-        /* Container que segura Sidebar e Main */
+        /* Estrutura Desktop e Mobile Idênticas */
         .wrapper { display: flex; flex-direction: row; flex-grow: 1; overflow: hidden; }
 
-        /* Sidebar Lateral Estilo Desktop */
         aside { 
-            width: 240px; background: #0a0a0a; border-right: 1px solid #222; 
-            padding: 20px; display: flex; flex-direction: column; gap: 8px; 
+            width: 220px; background: #0a0a0a; border-right: 1px solid #222; 
+            padding: 15px; display: flex; flex-direction: column; gap: 8px; 
             flex-shrink: 0; overflow-y: auto;
         }
 
         .nav-btn { 
-            background: var(--verde); color: black; border: none; padding: 14px 12px; 
+            background: var(--verde); color: black; border: none; padding: 12px 10px; 
             border-radius: 8px; font-weight: 900; cursor: pointer; text-align: left;
-            text-transform: uppercase; font-size: 10px; transition: 0.3s;
-            white-space: normal; line-height: 1.2;
+            text-transform: uppercase; font-size: 9px; transition: 0.3s;
+            line-height: 1.2;
         }
         .nav-btn.active { outline: 2px solid white; box-shadow: 0 0 10px var(--verde); }
 
         /* Conteúdo Principal */
-        main { flex-grow: 1; padding: 40px; overflow-y: auto; background: radial-gradient(circle at top right, #1a0033 0%, #000 80%); }
-        .aba-conteudo { display: none; max-width: 900px; margin: 0 auto; } 
+        main { flex-grow: 1; padding: 30px; overflow-y: auto; background: radial-gradient(circle at top right, #1a0033 0%, #000 80%); position: relative; }
+        .aba-conteudo { display: none; width: 100%; } 
         .aba-conteudo.ativa { display: block; animation: fadeIn 0.5s ease; }
 
-        h1 { font-size: 34px; font-weight: 900; margin-bottom: 15px; line-height: 1.1; color: white; }
-        p { font-size: 16px; color: #ccc; line-height: 1.5; }
+        h1 { font-size: 28px; font-weight: 900; margin-bottom: 15px; line-height: 1.1; color: white; }
+        p { font-size: 14px; color: #ccc; line-height: 1.5; }
 
-        /* Elementos Internos */
-        .pilar-container { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+        /* Botões Internos (Pilares/Rede) */
+        .pilar-container { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
         .btn-pilar { 
-            flex: 1; min-width: 110px; padding: 12px; border: 1px solid #333; background: #0a0a0a;
-            color: #888; font-weight: 900; cursor: pointer; border-radius: 10px; transition: 0.3s;
-            text-transform: uppercase; font-size: 9px;
+            flex: 1; min-width: 90px; padding: 10px; border: 1px solid #333; background: #0a0a0a;
+            color: #888; font-weight: 900; cursor: pointer; border-radius: 8px; transition: 0.3s;
+            text-transform: uppercase; font-size: 8px;
         }
         .btn-pilar.active-fisico { border-color: var(--verde); color: var(--verde); background: rgba(38, 208, 124, 0.1); }
 
-        .box-detalhes { background: var(--cinza); padding: 25px; border-radius: 15px; border: 1px solid #222; }
+        .box-detalhes { background: var(--cinza); padding: 20px; border-radius: 15px; border: 1px solid #222; min-height: 200px; }
         .video-container { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #333; aspect-ratio: 16/9; background: #000; margin-top: 15px; }
 
-        /* Responsividade para Celular */
+        /* Check-items (Aparecerão iguais no mobile) */
+        .check-item { display: flex; gap: 8px; margin-top: 10px; align-items: flex-start; }
+        .check-item b { color: var(--verde); font-size: 16px; }
+
+        /* AJUSTES MOBILE (Mantendo a estrutura) */
         @media (max-width: 768px) {
-            aside { width: 100px; padding: 10px; gap: 6px; }
-            .nav-btn { 
-                font-size: 8px; padding: 10px 5px; text-align: center; 
-                display: flex; align-items: center; justify-content: center;
-                min-height: 50px;
-            }
-            main { padding: 20px 15px; }
-            h1 { font-size: 24px; }
-            .pilar-container { grid-template-columns: 1fr; }
-            .btn-pilar { min-width: 100%; }
-            .sac-card { margin-bottom: 10px; padding: 15px; }
+            aside { width: 90px; padding: 8px; }
+            .nav-btn { font-size: 7px; padding: 8px 5px; text-align: center; }
+            main { padding: 15px; }
+            h1 { font-size: 20px; }
+            p { font-size: 12px; }
+            .btn-pilar { font-size: 7px; min-width: 70px; }
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -79,25 +76,23 @@
 </head>
 <body>
 
-    <header>
-        <img src="logo.png" alt="TOTALPASS">
-    </header>
+    <header><img src="logo.png" alt="TOTALPASS"></header>
 
     <div class="wrapper">
-        <aside id="sidebar">
+        <aside>
             <button class="nav-btn active" onclick="mudar('home', this)">Home</button>
             <button class="nav-btn" onclick="mudar('quem', this)">Quem Somos</button>
-            <button class="nav-btn" onclick="mudar('pila', this)">Pilares</button>
+            <button class="nav-btn" onclick="mudar('pila', this)">Nossos Pilares</button>
             <button class="nav-btn" onclick="mudar('acad', this)">Academias</button>
-            <button class="nav-btn" onclick="mudar('diff', this)">Diferenciais</button>
-            <button class="nav-btn" onclick="mudar('plan', this)">Planos</button>
-            <button class="nav-btn" onclick="mudar('sac', this)">SAC</button>
+            <button class="nav-btn" onclick="mudar('diff', this)">+ Diferenciais</button>
+            <button class="nav-btn" onclick="mudar('plan', this)">Planos/Pagamento</button>
+            <button class="nav-btn" onclick="mudar('sac', this)">SAC / Redes</button>
             <button class="nav-btn" style="background: var(--rosa); color: white;" onclick="mudar('validacao', this)">Validação</button>
         </aside>
 
         <main>
             <div id="home" class="aba-conteudo ativa">
-                <span style="color: var(--rosa); font-weight: 900; font-size: 11px;">TRADE 2026</span>
+                <span style="color: var(--rosa); font-weight: 900; font-size: 10px;">TRADE 2026</span>
                 <h1>TREINAMENTO <span style="color: var(--verde);">TOTALPASS</span></h1>
                 <div class="video-container">
                     <iframe src="https://drive.google.com/file/d/1onONCtye0LpTh47WGMsTif3_6hiHp8LO/preview" width="100%" height="100%" allowfullscreen style="border:none;"></iframe>
@@ -106,8 +101,8 @@
 
             <div id="quem" class="aba-conteudo">
                 <h1>QUEM <span style="color: var(--rosa);">SOMOS</span></h1>
-                <p style="color: var(--verde); font-weight: 900; font-size: 13px;">NOSSO PROPÓSITO: A HUMANIDADE VIVENDO MAIS E MELHOR</p>
-                <p>Benefício corporativo focado em saúde integrada.</p>
+                <p>A <strong>TotalPass</strong> é um benefício corporativo do grupo Smart Fit / Bio Ritmo.</p>
+                <p style="color: var(--verde); font-weight: 900; margin-top: 15px;">NOSSO PROPÓSITO: A HUMANIDADE VIVENDO MAIS E MELHOR</p>
             </div>
 
             <div id="pila" class="aba-conteudo">
@@ -118,7 +113,7 @@
                     <button class="btn-pilar" onclick="mudarPilar('nutri', this)">TOTAL NUTRI</button>
                 </div>
                 <div id="pilar-descricao-interna" class="box-detalhes">
-                    <p style="text-align: center; color: #555; padding-top: 20px;">Selecione um pilar.</p>
+                    <p style="text-align: center; color: #555; padding-top: 40px;">Selecione um pilar acima.</p>
                 </div>
             </div>
 
@@ -129,7 +124,7 @@
                     <button class="btn-pilar" onclick="mudarRede('modalidades', this)">Modalidades</button>
                 </div>
                 <div id="rede-descricao-interna" class="box-detalhes">
-                    <p style="text-align: center; color: #555; padding-top: 20px;">Selecione uma opção.</p>
+                    <p style="text-align: center; color: #555; padding-top: 40px;">Selecione uma opção acima.</p>
                 </div>
             </div>
 
@@ -140,7 +135,7 @@
                     <button class="btn-pilar" onclick="mudarDiff('vin', this)">Vínculo</button>
                 </div>
                 <div id="diff-descricao-interna" class="box-detalhes">
-                    <p style="text-align: center; color: #555; padding-top: 20px;">Selecione uma opção.</p>
+                    <p style="text-align: center; color: #555; padding-top: 40px;">Selecione uma funcionalidade.</p>
                 </div>
             </div>
 
@@ -154,16 +149,18 @@
             <div id="sac" class="aba-conteudo">
                 <h1>SUPORTE <span style="color: var(--rosa);">TÉCNICO</span></h1>
                 <div class="box-detalhes">
-                    <p style="font-size: 14px; margin-bottom: 5px; color: var(--verde); font-weight: 900;">E-MAIL SAC:</p>
-                    <p style="font-size: 14px; margin-bottom: 20px;">sac@totalpass.com.br</p>
-                    <p style="font-size: 14px; margin-bottom: 5px; color: var(--rosa); font-weight: 900;">INSTAGRAM:</p>
-                    <p style="font-size: 14px;">@TOTALPASS</p>
+                    <p style="color: var(--verde); font-weight: 900; margin-bottom: 5px;">E-MAIL SAC:</p>
+                    <p style="margin-bottom: 20px;">sac@totalpass.com.br</p>
+                    <p style="color: var(--rosa); font-weight: 900; margin-bottom: 5px;">INSTAGRAM:</p>
+                    <p>@TOTALPASS</p>
+                    <p style="color: var(--verde); font-weight: 900; margin-top: 20px;">DEMAIS REDES:</p>
+                    <p>@TOTALPASSBRASIL</p>
                 </div>
             </div>
 
             <div id="validacao" class="aba-conteudo">
-                <h1>VALIDAÇÃO</h1>
-                <div style="width: 100%; height: 500px; background: white; border-radius: 12px; overflow: hidden;">
+                <h1>VALIDAÇÃO DO TREINAMENTO</h1>
+                <div style="width: 100%; height: 500px; background: white; border-radius: 12px; overflow: hidden; border: 2px solid var(--verde);">
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd9LBrv2KtqfIbv5Xi9nwYLh2MHBBbKzvk8He1fGMe3KORErw/viewform?embedded=true" width="100%" height="100%" frameborder="0">Carregando…</iframe>
                 </div>
             </div>
@@ -183,26 +180,35 @@
             var display = document.getElementById('pilar-descricao-interna');
             document.querySelectorAll('#pila .btn-pilar').forEach(b => b.classList.remove('active-fisico'));
             btn.classList.add('active-fisico');
-            if(tipo === 'fisico') display.innerHTML = `<h3>TOTAL FIT</h3><p>+33 mil academias.</p>`;
-            else if(tipo === 'mental') display.innerHTML = `<h3>TOTAL MIND</h3><p>Psicologia e meditação.</p>`;
-            else display.innerHTML = `<h3>TOTAL NUTRI</h3><p>Guias alimentares.</p>`;
+            
+            if (tipo === 'fisico') {
+                display.innerHTML = `<h3>TOTAL FIT</h3><div class="check-item"><b>•</b> <p>+33 mil academias</p></div><div class="check-item"><b>•</b> <p>Smart Fit e Bio Ritmo inclusas</p></div>`;
+            } else if (tipo === 'mental') {
+                display.innerHTML = `<h3>TOTAL MIND</h3><div class="check-item"><b>•</b> <p>Psicologia on-line</p></div><div class="check-item"><b>•</b> <p>App Starbem e Positiv</p></div>`;
+            } else {
+                display.innerHTML = `<h3>TOTAL NUTRI</h3><div class="check-item"><b>•</b> <p>Guias alimentares</p></div>`;
+            }
         }
 
         function mudarRede(tipo, btn) {
             var display = document.getElementById('rede-descricao-interna');
             document.querySelectorAll('#acad .btn-pilar').forEach(b => b.classList.remove('active-fisico'));
             btn.classList.add('active-fisico');
-            if(tipo === 'logos') display.innerHTML = `<h3>REDE</h3><p>Smart Fit, Bio Ritmo e mais.</p>`;
-            else display.innerHTML = `<h3>MODALIDADES</h3><p>Musculação, Yoga, Crossfit.</p>`;
+            if(tipo === 'logos') display.innerHTML = `<h3>REDE</h3><p>Smart Fit, Bio Ritmo, Velocity, Race Bootcamp.</p>`;
+            else display.innerHTML = `<h3>MODALIDADES</h3><p>Musculação, Natação, Yoga, Pilates, Beach Tennis.</p>`;
         }
 
         function mudarDiff(tipo, btn) {
             var display = document.getElementById('diff-descricao-interna');
             document.querySelectorAll('#diff .btn-pilar').forEach(b => b.classList.remove('active-fisico'));
             btn.classList.add('active-fisico');
-            const aviso = `<p style="color:var(--rosa); font-size:11px; margin-top:10px; border:1px dashed var(--rosa); padding:8px;">⚠️ Cancelar o plano antigo antes.</p>`;
-            if(tipo === 'dep') display.innerHTML = `<h3>DEPENDENTE</h3><p>No Perfil do App.</p>${aviso}`;
-            else display.innerHTML = `<h3>VÍNCULO</h3><p>Tela Inicial > Vincular Conta.</p>${aviso}`;
+            const aviso = `<div style="margin-top:15px; border:1px dashed var(--rosa); padding:10px; font-size:11px;"><b style="color:var(--rosa)">⚠️ IMPORTANTE:</b> Cancelar o plano ativo antes de vincular.</div>`;
+            
+            if (tipo === 'dep') {
+                display.innerHTML = `<h3>DEPENDENTE</h3><p>1. Perfil > Dependentes.<br>2. Adicionar dados.</p>${aviso}`;
+            } else {
+                display.innerHTML = `<h3>VÍNCULO</h3><p>1. Tela Inicial.<br>2. Atualizar vínculo.</p>${aviso}`;
+            }
         }
     </script>
 </body>
